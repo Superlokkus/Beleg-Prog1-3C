@@ -1,3 +1,6 @@
+//Name: Markus Klemm
+//Studiengruppe: 13/041/01
+//MatrNr: 36438
 //
 //  main.c
 //  Belegaufgabe 3 C

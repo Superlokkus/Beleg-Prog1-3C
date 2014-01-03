@@ -1,8 +1,6 @@
-/*  bitte in alle Quellfiles eintragen! 
-Name:
-Studiengruppe:
-MatrNr:
-*/
+//Name: Markus Klemm
+//Studiengruppe: 13/041/01
+//MatrNr: 36438
 
 
 /* list.h */
