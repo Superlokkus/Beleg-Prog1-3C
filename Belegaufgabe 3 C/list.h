@@ -43,7 +43,7 @@ int    addItemToList (tList* pList, 		    /* fuege sortiert ein  */
                      void * pItem,
                      int(*fcmp)(void*pItList,void*pItNew));
 
-void   removeItem    (tList* pList);                /* loesche %           */
+void   removeItem    (tList* pList);//Sets current to NULL                /* loesche %           */
 
 void* getSelected    (tList* pList);                /* gib aktuellen DS    */
 void* getFirst       (tList* pList);                /* gib ersten DS       */

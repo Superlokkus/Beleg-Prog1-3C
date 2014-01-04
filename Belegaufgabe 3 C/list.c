@@ -98,4 +98,83 @@ int insertBefore(tList* pList, void *pItemIns)
     return OK;
 }
 
+int insertHead (tList* pList, void *pItemIns)
+{
+    if (pList->head == NULL) {
+        tCnct *newCnct = malloc(sizeof(tCnct));
+        if (newCnct == NULL) {
+            return FAIL;
+        }
+        newCnct->item = pItemIns;
+        pList->head = newCnct; pList->tail = newCnct; pList->current = newCnct;
+        return OK;
+    }
+    //(else)
+    tCnct * maybesomebodywantstousecurrent = pList->current;
+    
+    pList->current = pList->head;
+    
+    if (insertBefore(pList, pItemIns) != OK) {
+        pList->current = maybesomebodywantstousecurrent;
+        return FAIL;
+    }
+    pList->current = maybesomebodywantstousecurrent;
+    return OK;
+}
+
+int insertTail (tList* pList, void *pItemIns)
+{
+    if (pList->head == NULL) {
+        tCnct *newCnct = malloc(sizeof(tCnct));
+        if (newCnct == NULL) {
+            return FAIL;
+        }
+        newCnct->item = pItemIns;
+        pList->head = newCnct; pList->tail = newCnct; pList->current = newCnct;
+        return OK;
+    }
+    //(else)
+    tCnct * maybesomebodywantstousecurrent = pList->current;
+    pList->current = pList->tail;
+    
+    if (insertBehind(pList, pItemIns) != OK) {
+        pList->current = maybesomebodywantstousecurrent;
+        return FAIL;
+    }
+    pList->current = maybesomebodywantstousecurrent;
+    return OK;
+
+}
+
+void removeItem(tList* pList)
+{
+    if (pList->current == NULL) {
+        return;
+    }
+    
+    if (pList->current == pList->head) {
+        pList->current->next->prev = NULL;
+        pList->head = pList->current->next;
+    }
+    else
+    {
+        pList->current->next->prev = pList->current->prev;
+    }
+    if (pList->current == pList->tail) {
+        pList->current->prev->next = NULL;
+        pList->tail = pList->current;
+    }
+    else
+    {
+        pList->current->prev->next = pList->current->next;
+    }
+    
+    free(pList->current);
+    
+    pList->current = NULL;
+    
+
+}
+
+
 
