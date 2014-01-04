@@ -154,7 +154,7 @@ void removeItem(tList* pList)
     if (pList->current == pList->head && pList->current == pList->tail) {
         //Last item in list
         free(pList->current);
-        pList->current = NULL; pList->head = NULL; pList->tail = NULL;
+        pList->current = NULL; pList->head = NULL; pList->tail = NULL; //There should not be a need to handle this elsewhere
     }
     
     if (pList->current == pList->head) {
@@ -177,6 +177,55 @@ void removeItem(tList* pList)
     free(pList->current);
     pList->current = NULL;
 }
-
-
+void* getSelected(tList* pList)
+{
+    if (pList->current == NULL) {
+        return NULL; //You get what you deserve
+    }
+    return pList->current->item;
+}
+void* getFirst(tList* pList)
+{
+    if (pList->head == NULL) {
+        return NULL;
+    }
+    return pList->head->item;
+}
+void* getLast(tList* pList)
+{
+    if (pList->tail == NULL) {
+        return NULL;
+    }
+    return pList->tail->item;
+}
+void* getNext(tList* pList)
+{
+    if (pList->current == NULL) {
+        return NULL;
+    }
+    pList->current = pList->current->next;
+    return pList->current->item;
+}
+void* getPrev(tList* pList)
+{
+    if (pList->current == NULL) {
+        return NULL;
+    }
+    pList->current = pList->current->prev;
+    return pList->current->item;
+}
+void* getIndexed(tList* pList,int Idx)
+{
+    pList->current = pList->head;
+    int i;
+    for (i=0; i<Idx; i++) {
+        /*Loop could be avioded with current = current + Idx
+         but in that case, behaviour for Idx > n Elements would be undefined*/
+        if (pList->current->next == NULL && i != Idx-1) {
+            return NULL;
+        }
+        pList->current++;
+    }
+    return pList->current->item;
+}
 
