@@ -151,6 +151,11 @@ void removeItem(tList* pList)
     if (pList->current == NULL) {
         return;
     }
+    if (pList->current == pList->head && pList->current == pList->tail) {
+        //Last item in list
+        free(pList->current);
+        pList->current = NULL; pList->head = NULL; pList->tail = NULL;
+    }
     
     if (pList->current == pList->head) {
         pList->current->next->prev = NULL;
@@ -170,10 +175,7 @@ void removeItem(tList* pList)
     }
     
     free(pList->current);
-    
     pList->current = NULL;
-    
-
 }
 
 
