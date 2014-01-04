@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2817369118771AC500D389EB /* list.c in Sources */ = {isa = PBXBuildFile; fileRef = 2817369018771AC500D389EB /* list.c */; };
 		28231453185724F700388556 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 28231452185724F700388556 /* main.c */; };
 		28231455185724F700388556 /* Belegaufgabe_3_C.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 28231454185724F700388556 /* Belegaufgabe_3_C.1 */; };
 /* End PBXBuildFile section */
@@ -25,6 +26,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2817369018771AC500D389EB /* list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = list.c; sourceTree = "<group>"; };
 		2823144F185724F700388556 /* Belegaufgabe 3 C */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Belegaufgabe 3 C"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28231452185724F700388556 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		28231454185724F700388556 /* Belegaufgabe_3_C.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Belegaufgabe_3_C.1; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 				28231452185724F700388556 /* main.c */,
 				2823145B1857252400388556 /* Aufgabenstellung */,
 				2823145C1857258300388556 /* list.h */,
+				2817369018771AC500D389EB /* list.c */,
 				28231454185724F700388556 /* Belegaufgabe_3_C.1 */,
 			);
 			path = "Belegaufgabe 3 C";
@@ -122,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28231453185724F700388556 /* main.c in Sources */,
+				2817369118771AC500D389EB /* list.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +233,7 @@
 				2823145A185724F700388556 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
