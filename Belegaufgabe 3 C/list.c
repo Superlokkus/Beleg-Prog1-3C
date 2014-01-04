@@ -216,16 +216,32 @@ void* getPrev(tList* pList)
 }
 void* getIndexed(tList* pList,int Idx)
 {
-    pList->current = pList->head;
-    int i;
-    for (i=0; i<Idx; i++) {
-        /*Loop could be avioded with current = current + Idx
-         but in that case, behaviour for Idx > n Elements would be undefined*/
-        if (pList->current->next == NULL && i != Idx-1) {
-            return NULL;
+    if (Idx >= 0) {
+        pList->current = pList->head;
+        int i;
+        for (i=0; i<Idx; i++) {
+            pList->current = pList->current->next;
+            if (pList->current == NULL) {
+                return NULL;
+            }
         }
-        pList->current++;
+    }
+    else //Begin at tail Idx <0
+    {
+        pList->current = pList->tail;
+        int i;
+        for (i=0; i>Idx; i--) {
+            pList->current = pList->current->prev;
+            if (pList->current == NULL) {
+                return NULL;
+            }
+        }
     }
     return pList->current->item;
 }
+int    addItemToList (tList* pList,void * pItem,int(*fcmp)(void*pItList,void*pItNew))
+{
+    
+}
+
 

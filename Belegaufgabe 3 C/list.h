@@ -50,5 +50,5 @@ void* getFirst       (tList* pList);//Won't change current                /* gib
 void* getLast        (tList* pList);//Won't change current               /* gib letzten DS      */
 void* getNext        (tList* pList);                /* gib naechsten DS    */
 void* getPrev        (tList* pList);                /* gib vorigen DS      */
-void* getIndexed     (tList* pList,int Idx);        /* gib DS lt. Index    */
+void* getIndexed     (tList* pList,int Idx);//Return NULL for invalid Idx         /* gib DS lt. Index    */
 #endif //MKN_Beleg3C_list_h
