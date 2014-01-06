@@ -21,6 +21,7 @@ typedef struct
     tCnct * head; //==NULL if empty
     tCnct * current; //==NULL if empty
     tCnct * tail; //==NULL if empty
+    unsigned long elements;
 }tList;	/* Datentyp fuer die Liste */
 
 #define OK 1
@@ -39,7 +40,7 @@ int    insertBehind  (tList* pList, void *pItemIns);/* fuege ein hinter %  */
 int    insertBefore  (tList* pList, void *pItemIns);/* fuege ein vor    %  */
 int    insertHead    (tList* pList, void *pItemIns);//Won't change current /* fuege vorn ein      */
 int    insertTail    (tList* pList, void *pItemIns);//Won't change current /* fuege hinten ein    */
-int    addItemToList (tList* pList, 		    /* fuege sortiert ein  */
+int    addItemToList (tList* pList, //Assumes pList is already sorted		    /* fuege sortiert ein  */
                      void * pItem,
                      int(*fcmp)(void*pItList,void*pItNew));
 
@@ -50,5 +51,6 @@ void* getFirst       (tList* pList);//Won't change current                /* gib
 void* getLast        (tList* pList);//Won't change current               /* gib letzten DS      */
 void* getNext        (tList* pList);                /* gib naechsten DS    */
 void* getPrev        (tList* pList);                /* gib vorigen DS      */
-void* getIndexed     (tList* pList,int Idx);//Return NULL for invalid Idx         /* gib DS lt. Index    */
+void* getIndexed     (tList* pList, //returns NULL for invalid Idx
+                      int Idx);//Negative Idx for reverse beginning at tail   /* gib DS lt. Index    */
 #endif //MKN_Beleg3C_list_h
