@@ -239,9 +239,35 @@ void* getIndexed(tList* pList,int Idx)
     }
     return pList->current->item;
 }
-int    addItemToList (tList* pList,void * pItem,int(*fcmp)(void*pItList,void*pItNew))
+int addItemToList (tList* pList,void * pItem,int(*fcmp)(void*pItList,void*pItNew))
 {
+    //List empty?
+    if (pList->head == NULL) {
+        insertHead(pList, pItem);
+    }
     
+    //Corner cases
+    if (fcmp(pItem,getFirst(pList)) < 0) {
+        if (insertHead(pList, pItem) == OK)
+            return OK;
+        else
+            return FAIL;
+    }
+    if (fcmp(pItem,getLast(pItem)) > 0) {
+        if (insertTail(pList, pItem) == OK)
+            return OK;
+        else
+            return FAIL;
+    }
+    //End corner cases (head needed, tail for optimization)
+    
+    tCnct *oldsavedcurrent = pList->current;
+    while (fcmp(pItem,getNext(pList)) >0);
+    if (insertBefore(pList, pItem) != OK) {
+        return FAIL;
+    }
+    pList->current = oldsavedcurrent;
+    return OK;
 }
 
 

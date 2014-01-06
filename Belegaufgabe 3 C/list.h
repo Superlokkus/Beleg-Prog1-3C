@@ -21,7 +21,6 @@ typedef struct
     tCnct * head; //==NULL if empty
     tCnct * current; //==NULL if empty
     tCnct * tail; //==NULL if empty
-    unsigned long elements;
 }tList;	/* Datentyp fuer die Liste */
 
 #define OK 1
