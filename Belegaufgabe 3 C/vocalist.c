@@ -87,6 +87,20 @@ _Bool insertVoca(vocalist *list, const char *english, const char *german)
         return false;
     }
     return true;
-    
+}
+char* getEnglish(vocalist *list,const char* german)
+{
+    list->gerList->current = list->gerList->head;
+    if (strcmp(getFirst(list->gerList), german) == 0) {
+        return getSelected(list->gerList);
+    }
+
+    while(true) { //Infinity loop danger
+        if (getNext(list->gerList) == NULL) {
+            return NULL;
+        }
+        if(strcmp(getSelected(list->gerList), german) == 0)
+            return getSelected(list->gerList);
+    }
 }
 
