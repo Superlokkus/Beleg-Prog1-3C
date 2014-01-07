@@ -19,19 +19,20 @@ typedef	int	_Bool;
 #define	true	1
 #endif
 
-typedef struct{
-    char* english;
-    char* german;
-}voca;
 
 typedef tList vocalist;
 
 vocalist* newVocaList(void); //Returns NULL if allocation fails
-void deleteVocaList(vocalist); //Empties and deletes
+void deleteVocaList(vocalist *tobedeleted); //Empties and deletes
 
-_Bool insertVoca(vocalist); //Returns success (true) or fail (false)
+_Bool insertVoca(const char *english, const char *german); //Returns success==1 or fail==0
+_Bool deleteVoca(const char *english, const char *german); //Search and delete in List
 
+char* getGerman(const char* english); //Returns NULL if not found
+char* getEnglish(const char* german); //Retruns NULL if not found
 
+char* getSortedListGerman(const vocalist *tobelisted);//Subject may to change: Whitespace delimited
+char* getSortedListEnglish(const vocalist *tobelisted);//Subject may to change: Whitespace delimited
 
 
 #endif
