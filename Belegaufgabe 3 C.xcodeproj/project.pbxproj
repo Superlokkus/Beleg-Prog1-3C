@@ -32,8 +32,8 @@
 		28231454185724F700388556 /* Belegaufgabe_3_C.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Belegaufgabe_3_C.1; sourceTree = "<group>"; };
 		2823145B1857252400388556 /* Aufgabenstellung */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Aufgabenstellung; sourceTree = "<group>"; };
 		2823145C1857258300388556 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
-		28DFB8ED187B5A0E0062BD82 /* voca.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = voca.h; sourceTree = "<group>"; };
 		28DFB8EE187BEB620062BD82 /* ui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ui.h; sourceTree = "<group>"; };
+		28DFB8F1187C1B050062BD82 /* vocalist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vocalist.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +67,8 @@
 			isa = PBXGroup;
 			children = (
 				28231452185724F700388556 /* main.c */,
+				28DFB8F1187C1B050062BD82 /* vocalist.h */,
 				28DFB8EE187BEB620062BD82 /* ui.h */,
-				28DFB8ED187B5A0E0062BD82 /* voca.h */,
 				2823145B1857252400388556 /* Aufgabenstellung */,
 				2823145C1857258300388556 /* list.h */,
 				2817369018771AC500D389EB /* list.c */,

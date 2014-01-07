@@ -14,8 +14,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
-#include "voca.h"
 #include "ui.h"
+#include "vocalist.h"
 
 
 int main(int argc, const char * argv[])
