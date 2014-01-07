@@ -10,12 +10,18 @@
 //
 
 #include <stdio.h>
-#include "list.h"
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <errno.h>
+#include "voca.h"
+#include "ui.h"
+
 
 int main(int argc, const char * argv[])
 {
-
-     
+    
+    void UILoop();
     
     return 0;
 }

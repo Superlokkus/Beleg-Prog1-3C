@@ -11,3 +11,5 @@ Die Quelltexte sind sorgsam zu kommentieren. Dazu gehört auch die Urheberschaft
 Für alle verwalteten Daten sind Speicherbereiche in der erfordelichen Größe per malloc/free bereitzustellen
 Das Programm bestehe mindestens aus 3 C-Modulen bestehend aus c- und Headerfile. Dabei realisiere ein Modul die Liste, ein Modul die Benutzerschnittstelle (Menus, Eingabemasken, Anzeige ...) und der dritte Modul die oberflächenunabhängigen Teile, z.B. Dateiarbeit. Die Module sollen einzeln compilierbar sein.
 Sofern das Programm keine plattformabhängigen Oberflächenbibliotheken, wie libforms, gtk oder ncurses verwendet, soll das Programm portabel sein und sowohl unter Windows als auch unter Linux/Unix übersetzt und ausgeführt werden können. In jedem Fall müssen die Programme auf den Rechnern in den Laboren der Fakultät vorgeführt und übersetzt werden können.
+
+Notizen Gespräch Prof: Keine feste Zeichenkettengröße, protables Dateiformat
