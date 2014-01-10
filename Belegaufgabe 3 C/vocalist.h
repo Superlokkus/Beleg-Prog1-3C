@@ -22,11 +22,15 @@ typedef	int	_Bool;
 #define	true	1
 #endif
 
-
+/*! @typedef vocalist
+ @brief Representation of a dictionary for use with the functions vocalist libray.
+ @warning Do not use the members by ourself.
+ */
 typedef struct {
     tList *engList;
     tList *gerList;
 }vocalist;
+
 
 vocalist* newVocaList(void); //Returns NULL if allocation fails
 _Bool deleteVocaList(vocalist *tobedeleted); //delete empty vocalist

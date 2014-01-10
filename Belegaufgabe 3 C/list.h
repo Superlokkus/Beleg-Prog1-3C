@@ -1,45 +1,68 @@
 //Name: Markus Klemm
 //Studiengruppe: 13/041/01
 //MatrNr: 36438
+///
+/*! @file list.h
+ @Library for a double linked list
+ @author Markus Klemm
+*/
+
 #ifndef MKN_Beleg3C_list_h
 #define MKN_Beleg3C_list_h
 
-/* list.h */
-/*------------------------------------------------------------------------*/
-/* Datenstruktur eines Listenverbindungselementes                         */
-
+/* @typedef
+ @brief Representation of a node in a tList.
+ @privatesection
+ */
 typedef struct tCnct
 {
-    struct tCnct * prev; //== NULL if head
-    struct tCnct * next; //== NULL if tail
+    struct tCnct * prev; //< == NULL if head
+    struct tCnct * next; //< == NULL if tail
     void * item;
     
 }tCnct;	/* Datentyp fuer Connector */
 
+/*! @typedef
+ @brief Representation of a double linked list.
+ 
+ @public
+*/
 typedef struct
 {
-    tCnct * head; //==NULL if empty
-    tCnct * current; //==NULL if empty
-    tCnct * tail; //==NULL if empty
+    tCnct * head; //!< ==NULL if empty
+    tCnct * current; //!< To be manipulated by user. ==NULL if empty
+    tCnct * tail; //!< ==NULL if empty
 }tList;	/* Datentyp fuer die Liste */
 
 #define OK 1
 #define FAIL 0
-/*-------------------------------------------------------------------------*/
-/* Prototypen fuer die Funktionen                                          */
 
-/* list.h */
-/*------------------------------------------------------------------------*/
-/* Datenstruktur eines Listenverbindungselementes                         */
-
-tList * createList(void);//Returns NULL if something fails  /* erzeuge leere Liste */
-int     deleteList(tList* pList);                   /* loesche leere Liste */
+/*!
+ @brief Creates an empty list. 
+ 
+ Head, tail and current are initialised to NULL.
+ @returns Returns NULL if allocation fails, else the new tList.
+ */
+tList * createList(void);
+/*!
+ @brief Deletes an empty list.
+ @param pList The tList which should be deleted.
+ @return Returns FAIL if list is not empty, else OK.
+ */
+int     deleteList(tList* pList);
 
 int    insertBehind  (tList* pList, void *pItemIns);/* fuege ein hinter %  */
 int    insertBefore  (tList* pList, void *pItemIns);/* fuege ein vor    %  */
 int    insertHead    (tList* pList, void *pItemIns);//Won't change current /* fuege vorn ein      */
 int    insertTail    (tList* pList, void *pItemIns);//Won't change current /* fuege hinten ein    */
-int    addItemToList (tList* pList, //Assumes pList is already sorted		    /* fuege sortiert ein  */
+/*! @brief Add Item to a sorted/empty List.
+ @returns #OK if adding was sucessfull, else #FAIL
+ @attention Only use this function and deleteList() for item manipulation, to sustain an ordered list.
+ @param *pList And already sorted or empty List.
+ @param *pItem Pointer to item to add.
+ @param (*fcmp) Function for the sorting criteria, which must returns a integer of the comparsion like strcmp() does.
+ */
+int    addItemToList (tList* pList,
                      void * pItem,
                      int(*fcmp)(void*pItList,void*pItNew));
 
