@@ -16,13 +16,19 @@ typedef struct {
     char *german;
 }wordpair;
 
-int gerCmp(const wordpair *first,const wordpair *second)
+int gerCmp(void *first, void *second)
 {
-    return strcmp(first->german, second->german);
+    const wordpair *wfirst = (const wordpair *)first;
+    const wordpair *wsecond = (const wordpair *)second;
+    
+    return strcmp(wfirst->german, wsecond->german);
 }
-int engCmp(const wordpair *first,const wordpair *second)
+int engCmp(void *first,void *second)
 {
-    return strcmp(first->english, second->english);
+    const wordpair *wfirst = (const wordpair *)first;
+    const wordpair *wsecond = (const wordpair *)second;
+    
+    return strcmp(wfirst->english, wsecond->english);
 }
 
 vocalist* newVocaList(void)
@@ -95,7 +101,7 @@ char* getEnglish(vocalist *list,const char* german)
         return getSelected(list->gerList);
     }
 
-    while(true) { //Infinity loop danger
+    while(true) { //Infinite loop danger
         if (getNext(list->gerList) == NULL) {
             return NULL;
         }
