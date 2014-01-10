@@ -200,7 +200,7 @@ void* getLast(tList* pList)
 }
 void* getNext(tList* pList)
 {
-    if (pList->current == NULL) {
+    if (pList->current == NULL || pList->current->next == NULL) {
         return NULL;
     }
     pList->current = pList->current->next;
@@ -208,7 +208,7 @@ void* getNext(tList* pList)
 }
 void* getPrev(tList* pList)
 {
-    if (pList->current == NULL) {
+    if (pList->current == NULL || pList->current->prev == NULL) {
         return NULL;
     }
     pList->current = pList->current->prev;
@@ -247,13 +247,13 @@ int addItemToList (tList* pList,void * pItem,int(*fcmp)(void*pItList,void*pItNew
     }
     
     //Corner cases
-    if (fcmp(pItem,getFirst(pList)) < 0) {
+    if (fcmp(pItem,getFirst(pList)) <= 0) {
         if (insertHead(pList, pItem) == OK)
             return OK;
         else
             return FAIL;
     }
-    if (fcmp(pItem,getLast(pItem)) > 0) {
+    if (fcmp(pItem,getLast(pList)) > 0) {
         if (insertTail(pList, pItem) == OK)
             return OK;
         else

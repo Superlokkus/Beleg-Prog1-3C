@@ -20,8 +20,14 @@
 
 int main(int argc, const char * argv[])
 {
+    vocalist *foo = newVocaList();
+    insertVoca(foo, "House", "Haus");
+    insertVoca(foo, "Cat", "Katze");
     
-    void UILoop();
+    printf("%s\n",getEnglish(foo, "Haus"));
+    printf("%s\n",getEnglish(foo, "Katze"));
+    
+    //void UILoop();
     
     return 0;
 }

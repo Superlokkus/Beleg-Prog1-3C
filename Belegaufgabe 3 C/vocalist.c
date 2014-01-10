@@ -98,15 +98,16 @@ char* getEnglish(vocalist *list,const char* german)
 {
     list->gerList->current = list->gerList->head;
     if (strcmp(getFirst(list->gerList), german) == 0) {
-        return getSelected(list->gerList);
+        return getFirst(list->gerList);
     }
 
     while(true) { //Infinite loop danger
         if (getNext(list->gerList) == NULL) {
             return NULL;
         }
-        if(strcmp(getSelected(list->gerList), german) == 0)
-            return getSelected(list->gerList);
+        wordpair *mywordpair = (wordpair *) getSelected(list->gerList);
+        if(strcmp(mywordpair->german, german) == 0)
+            return mywordpair->english;
     }
 }
 
