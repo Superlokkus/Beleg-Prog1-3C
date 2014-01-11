@@ -28,6 +28,7 @@ int main(int argc, const char * argv[])
     insertVoca(foo, "Fence", "Zaun");
     insertVoca(foo, "Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz", "Pneumonoultramicroscopicsilicovolcanoconiosis");
     
+    printf("%s\n", getEnglish(foo, "Katze"));
     printf("%s\n",getSortedListGerman(foo));
     printf("%s\n",getSortedListGerman(foo));
     

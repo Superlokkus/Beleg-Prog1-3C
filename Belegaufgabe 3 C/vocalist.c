@@ -103,14 +103,12 @@ char* getEnglish(vocalist *list,const char* german)
         return mywordpair->english;
     }
 
-    while(true) { //Infinite loop danger
-        if (getNext(list->gerList) == NULL) {
-            return NULL;
-        }
-
+    while(getNext(list->gerList) != NULL) { //Infinite loop danger
+        wordpair *mywordpair = (wordpair *) getSelected(list->gerList);
         if(strcmp(mywordpair->german, german) == 0)
             return mywordpair->english;
     }
+    return NULL;
 }
 char* getGerman(vocalist *list,const char* english)
 {
@@ -120,13 +118,12 @@ char* getGerman(vocalist *list,const char* english)
         return mywordpair->german;
     }
     
-    while(true) { //Infinite loop danger
-        if (getNext(list->engList) == NULL) {
-            return NULL;
-        }
+    while(getNext(list->engList) != NULL) { //Infinite loop danger
+        wordpair *mywordpair = (wordpair *) getSelected(list->engList);
         if(strcmp(mywordpair->english, english) == 0)
             return mywordpair->german;
     }
+    return NULL;
 }
 char* getSortedListGerman(const vocalist *tobelisted)
 {
