@@ -138,7 +138,7 @@ char* getSortedListGerman(const vocalist *tobelisted)
     //Allocating of the first element
     wordpair *mywordpair = (wordpair *) getFirst(tobelisted->gerList);
     
-    gerlist = malloc(sizeof(mywordpair->german) + sizeof(delimiter) + sizeof(mywordpair->english) + sizeof(pairdelimiter)); //Maybe -2 *sizeof(char) because we won't have 3 \0
+    gerlist = malloc((strlen(mywordpair->german) + strlen(delimiter) + strlen(mywordpair->english) + strlen(pairdelimiter) +1 ) * sizeof(char));
     
     if (gerlist == NULL) {
         return NULL;
@@ -155,8 +155,8 @@ char* getSortedListGerman(const vocalist *tobelisted)
     while (tobelisted->gerList->current->next != NULL) {
         mywordpair = getNext(tobelisted->gerList);
         
-        gerlist = realloc(gerlist, sizeof(gerlist)
-                + sizeof(mywordpair->german) + sizeof(delimiter) + sizeof(mywordpair->english) +sizeof(pairdelimiter));
+        gerlist = realloc(gerlist, (strlen(gerlist)
+                + strlen(mywordpair->german) + strlen(delimiter) + strlen(mywordpair->english) + strlen(pairdelimiter) +1 ) * sizeof(char));
         if (gerlist == NULL) {
             return NULL;
         }
@@ -181,7 +181,7 @@ char* getSortedListEnglish(const vocalist *tobelisted)
     //Allocating of the first element
     wordpair *mywordpair = (wordpair *) getFirst(tobelisted->engList);
     
-    englist = malloc(sizeof(mywordpair->english) + sizeof(delimiter) + sizeof(mywordpair->german) + sizeof(pairdelimiter)); //Maybe -2 *sizeof(char) because we won't have 3 \0
+    englist = malloc((strlen(mywordpair->english) + strlen(delimiter) + strlen(mywordpair->german) + strlen(pairdelimiter) +1 ) * sizeof(char)); //Maybe -2 *sizeof(char) because we won't have 3 \0
     
     if (englist == NULL) {
         return NULL;
@@ -198,8 +198,8 @@ char* getSortedListEnglish(const vocalist *tobelisted)
     while (tobelisted->engList->current->next != NULL) {
         mywordpair = getNext(tobelisted->engList);
         
-        englist = realloc(englist, sizeof(englist)
-                          + sizeof(mywordpair->english) + sizeof(delimiter) + sizeof(mywordpair->german) +sizeof(pairdelimiter));
+        englist = realloc(englist, (strlen(englist)
+                          + strlen(mywordpair->english) + strlen(delimiter) + strlen(mywordpair->german) + strlen(pairdelimiter) +1 ) * sizeof(char));
         if (englist == NULL) {
             return NULL;
         }
