@@ -55,7 +55,7 @@ int    insertBehind  (tList* pList, void *pItemIns);/* fuege ein hinter %  */
 int    insertBefore  (tList* pList, void *pItemIns);/* fuege ein vor    %  */
 int    insertHead    (tList* pList, void *pItemIns);//Won't change current /* fuege vorn ein      */
 int    insertTail    (tList* pList, void *pItemIns);//Won't change current /* fuege hinten ein    */
-/*! @brief Add Item to a sorted/empty List.
+/*! @brief Add Item to a sorted/empty List. Sets current of pList to added item.
  @returns #OK if adding was sucessfull, else #FAIL
  @attention Only use this function and deleteList() for item manipulation, to sustain an ordered list.
  @param *pList And already sorted or empty List.
@@ -66,13 +66,21 @@ int    addItemToList (tList* pList,
                      void * pItem,
                      int(*fcmp)(void*pItList,void*pItNew));
 
-void   removeItem    (tList* pList);//Sets current to NULL                /* loesche %           */
+/*! @brief Deletes node at which pLists current points to. Current will be set to NULL after deleting.
+ @param pList List whom current node has to be deleted
+ @warning Memory managment of the linked item is still in the responsiblity of the application.
+ */
+void   removeItem    (tList* pList);                /* loesche %           */
 
 void* getSelected    (tList* pList);                /* gib aktuellen DS    */
 void* getFirst       (tList* pList);//Won't change current                /* gib ersten DS       */
 void* getLast        (tList* pList);//Won't change current               /* gib letzten DS      */
 void* getNext        (tList* pList);                /* gib naechsten DS    */
 void* getPrev        (tList* pList);                /* gib vorigen DS      */
-void* getIndexed     (tList* pList, //returns NULL for invalid Idx
-                      int Idx);//Negative Idx for reverse beginning at tail   /* gib DS lt. Index    */
+/*!  @brief Returns item at the Idxth Position from the head for positive Idx, or from tail for negative, in the pList.
+ @returns Pointer to item or NULL for invalid Idx
+ @param pList List to be searched
+ @param Idx Indexposition
+ */
+void* getIndexed (tList* pList,int Idx);
 #endif //MKN_Beleg3C_list_h
