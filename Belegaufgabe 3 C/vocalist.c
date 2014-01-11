@@ -89,6 +89,7 @@ _Bool insertVoca(vocalist *list, const char *english, const char *german)
     }
     
     if (addItemToList(list->gerList, newwordpair, gerCmp) != OK) {
+        removeItem(list->engList);
         free(newwordpair->english); free(newwordpair->german); free(newwordpair);
         return false;
     }
