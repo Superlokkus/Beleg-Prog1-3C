@@ -29,6 +29,7 @@ int main(int argc, const char * argv[])
     
    
     printf("%s\n",getGerman(foo, "append"));
+    printf("%s\n",getEnglish(foo, "Haus"));
     
     printf("%s\n",getSortedListGerman(foo));
     

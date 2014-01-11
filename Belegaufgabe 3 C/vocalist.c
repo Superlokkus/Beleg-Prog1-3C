@@ -97,34 +97,32 @@ _Bool insertVoca(vocalist *list, const char *english, const char *german)
 char* getEnglish(vocalist *list,const char* german)
 {
     list->gerList->current = list->gerList->head;
-    if (strcmp(getFirst(list->gerList), german) == 0) {
-        return getFirst(list->gerList);
+    wordpair *mywordpair = (wordpair *) getSelected(list->gerList);
+    if (strcmp(mywordpair->german, german) == 0) {
+        return mywordpair->english;;
     }
 
     while(true) { //Infinite loop danger
         if (getNext(list->gerList) == NULL) {
             return NULL;
         }
-        wordpair *mywordpair = (wordpair *) getSelected(list->gerList);
+
         if(strcmp(mywordpair->german, german) == 0)
             return mywordpair->english;
     }
 }
-/*! @bug Returns NULL instead of word in some cases
- @todo Fix bug
- */
 char* getGerman(vocalist *list,const char* english)
 {
     list->engList->current = list->engList->head;
-    if (strcmp(getFirst(list->engList), english) == 0) {
-        return getFirst(list->engList);
+    wordpair *mywordpair = (wordpair *) getSelected(list->engList);
+    if (strcmp(mywordpair->english, english) == 0) {
+        return mywordpair->german;
     }
     
     while(true) { //Infinite loop danger
         if (getNext(list->engList) == NULL) {
             return NULL;
         }
-        wordpair *mywordpair = (wordpair *) getSelected(list->engList);
         if(strcmp(mywordpair->english, english) == 0)
             return mywordpair->german;
     }
