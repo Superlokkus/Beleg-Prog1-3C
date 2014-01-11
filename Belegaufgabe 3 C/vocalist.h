@@ -45,11 +45,11 @@ char* getEnglish(vocalist *list,const char* german); //Retruns NULL if not found
 @returns <German> <whitespace> <English> <\n>
  @remarks Delimiters may be changed in the future
 */
-char* getSortedListGerman(const vocalist *tobelisted);
+char* createSortedListGerman(const vocalist *tobelisted);
 /*! @brief To get the whole dictionary sorted lexically by the english words
  @returns <English> <Whitespace> <German> <\n>
  @remarks Delimiters may be changed in the future
  */
-char* getSortedListEnglish(const vocalist *tobelisted);
+char* createSortedListEnglish(const vocalist *tobelisted);
 
 #endif

@@ -68,14 +68,14 @@ _Bool insertVoca(vocalist *list, const char *english, const char *german)
         return false;
     }
     
-    newwordpair->english = malloc(sizeof(english));
+    newwordpair->english = malloc(sizeof(char)*(strlen(english)+1));
     if (newwordpair->english == NULL) {
         free(newwordpair);
         return false;
     }
     strcpy(newwordpair->english, english);
     
-    newwordpair->german = malloc(sizeof(german));
+    newwordpair->german = malloc((strlen(german)+1) * sizeof(char));
     if (newwordpair->german == NULL) {
         free(newwordpair->english);
         free(newwordpair);
@@ -89,6 +89,7 @@ _Bool insertVoca(vocalist *list, const char *english, const char *german)
     }
     
     if (addItemToList(list->gerList, newwordpair, gerCmp) != OK) {
+        removeItem(list->engList);
         free(newwordpair->english); free(newwordpair->german); free(newwordpair);
         return false;
     }
@@ -99,17 +100,15 @@ char* getEnglish(vocalist *list,const char* german)
     list->gerList->current = list->gerList->head;
     wordpair *mywordpair = (wordpair *) getSelected(list->gerList);
     if (strcmp(mywordpair->german, german) == 0) {
-        return mywordpair->english;;
+        return mywordpair->english;
     }
 
-    while(true) { //Infinite loop danger
-        if (getNext(list->gerList) == NULL) {
-            return NULL;
-        }
-
+    while(getNext(list->gerList) != NULL) { //Infinite loop danger
+        wordpair *mywordpair = (wordpair *) getSelected(list->gerList);
         if(strcmp(mywordpair->german, german) == 0)
             return mywordpair->english;
     }
+    return NULL;
 }
 char* getGerman(vocalist *list,const char* english)
 {
@@ -119,17 +118,16 @@ char* getGerman(vocalist *list,const char* english)
         return mywordpair->german;
     }
     
-    while(true) { //Infinite loop danger
-        if (getNext(list->engList) == NULL) {
-            return NULL;
-        }
+    while(getNext(list->engList) != NULL) { //Infinite loop danger
+        wordpair *mywordpair = (wordpair *) getSelected(list->engList);
         if(strcmp(mywordpair->english, english) == 0)
             return mywordpair->german;
     }
+    return NULL;
 }
-char* getSortedListGerman(const vocalist *tobelisted)
+char* createSortedListGerman(const vocalist *tobelisted)
 {
-    char *gerlist; //Momomo-Monster listlistlist... Todo But how to free?!
+    char *gerlist; //strcat spree spree spree...
     const char delimiter[] = {" "};
     const char pairdelimiter[] = {"\n"};
     
@@ -140,35 +138,39 @@ char* getSortedListGerman(const vocalist *tobelisted)
     //Allocating of the first element
     wordpair *mywordpair = (wordpair *) getFirst(tobelisted->gerList);
     
-    gerlist = malloc(sizeof(mywordpair->german) + sizeof(delimiter) + sizeof(mywordpair->english) + sizeof(pairdelimiter)); //Maybe -2 *sizeof(char) because we won't have 3 \0
+    gerlist = malloc((strlen(mywordpair->german) + strlen(delimiter) + strlen(mywordpair->english) + strlen(pairdelimiter) +1 ) * sizeof(char));
+    
+    if (gerlist == NULL) {
+        return NULL;
+    }
     
     //Building of the first element
-    (void) stpcpy(gerlist, mywordpair->german);
-    (void) strcat(gerlist, delimiter);
-    (void) strcat(gerlist, mywordpair->english);
-    (void) strcat(gerlist, pairdelimiter);
+    strcpy(gerlist, mywordpair->german);
+    strcat(gerlist, delimiter);
+    strcat(gerlist, mywordpair->english);
+    strcat(gerlist, pairdelimiter);
     
     //and the possible rest
     tobelisted->gerList->current = tobelisted->gerList->head;
     while (tobelisted->gerList->current->next != NULL) {
         mywordpair = getNext(tobelisted->gerList);
         
-        gerlist = realloc(gerlist, sizeof(gerlist)
-                + sizeof(mywordpair->german) + sizeof(delimiter) + sizeof(mywordpair->english) +sizeof(pairdelimiter));
+        gerlist = realloc(gerlist, (strlen(gerlist)
+                + strlen(mywordpair->german) + strlen(delimiter) + strlen(mywordpair->english) + strlen(pairdelimiter) +1 ) * sizeof(char));
         if (gerlist == NULL) {
             return NULL;
         }
         
-        (void) strcat(gerlist, mywordpair->german);
-        (void) strcat(gerlist, delimiter);
-        (void) strcat(gerlist, mywordpair->english);
-        (void) strcat(gerlist, pairdelimiter);
+        strcat(gerlist, mywordpair->german);
+        strcat(gerlist, delimiter);
+        strcat(gerlist, mywordpair->english);
+        strcat(gerlist, pairdelimiter);
     }
     return gerlist;
 }
-char* getSortedListEnglish(const vocalist *tobelisted)
+char* createSortedListEnglish(const vocalist *tobelisted)
 {
-    char *englist; //Momomo-Monster listlistlist... Todo But how to free?!
+    char *englist; //strcat spree spree spree...
     const char delimiter[] = {" "};
     const char pairdelimiter[] = {"\n"};
     
@@ -179,29 +181,33 @@ char* getSortedListEnglish(const vocalist *tobelisted)
     //Allocating of the first element
     wordpair *mywordpair = (wordpair *) getFirst(tobelisted->engList);
     
-    englist = malloc(sizeof(mywordpair->english) + sizeof(delimiter) + sizeof(mywordpair->german) + sizeof(pairdelimiter)); //Maybe -2 *sizeof(char) because we won't have 3 \0
+    englist = malloc((strlen(mywordpair->english) + strlen(delimiter) + strlen(mywordpair->german) + strlen(pairdelimiter) +1 ) * sizeof(char)); //Maybe -2 *sizeof(char) because we won't have 3 \0
+    
+    if (englist == NULL) {
+        return NULL;
+    }
     
     //Building of the first element
-    (void) stpcpy(englist, mywordpair->english);
-    (void) strcat(englist, delimiter);
-    (void) strcat(englist, mywordpair->german);
-    (void) strcat(englist, pairdelimiter);
+    strcpy(englist, mywordpair->english);
+    strcat(englist, delimiter);
+    strcat(englist, mywordpair->german);
+    strcat(englist, pairdelimiter);
     
     //and the possible rest
     tobelisted->engList->current = tobelisted->engList->head;
     while (tobelisted->engList->current->next != NULL) {
         mywordpair = getNext(tobelisted->engList);
         
-        englist = realloc(englist, sizeof(englist)
-                          + sizeof(mywordpair->english) + sizeof(delimiter) + sizeof(mywordpair->german) +sizeof(pairdelimiter));
+        englist = realloc(englist, (strlen(englist)
+                          + strlen(mywordpair->english) + strlen(delimiter) + strlen(mywordpair->german) + strlen(pairdelimiter) +1 ) * sizeof(char));
         if (englist == NULL) {
             return NULL;
         }
         
-        (void) strcat(englist, mywordpair->english);
-        (void) strcat(englist, delimiter);
-        (void) strcat(englist, mywordpair->german);
-        (void) strcat(englist, pairdelimiter);
+        strcat(englist, mywordpair->english);
+        strcat(englist, delimiter);
+        strcat(englist, mywordpair->german);
+        strcat(englist, pairdelimiter);
     }
     return englist;
 }
