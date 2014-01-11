@@ -125,9 +125,9 @@ char* getGerman(vocalist *list,const char* english)
     }
     return NULL;
 }
-char* getSortedListGerman(const vocalist *tobelisted)
+char* createSortedListGerman(const vocalist *tobelisted)
 {
-    char *gerlist; //Momomo-Monster listlistlist... Todo But how to free?!
+    char *gerlist; //strcat spree spree spree...
     const char delimiter[] = {" "};
     const char pairdelimiter[] = {"\n"};
     
@@ -168,9 +168,9 @@ char* getSortedListGerman(const vocalist *tobelisted)
     }
     return gerlist;
 }
-char* getSortedListEnglish(const vocalist *tobelisted)
+char* createSortedListEnglish(const vocalist *tobelisted)
 {
-    char *englist; //Momomo-Monster listlistlist... Todo But how to free?!
+    char *englist; //strcat spree spree spree...
     const char delimiter[] = {" "};
     const char pairdelimiter[] = {"\n"};
     
