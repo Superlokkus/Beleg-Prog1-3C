@@ -26,6 +26,7 @@ int main(int argc, const char * argv[])
     insertVoca(foo, "X-Ray", "Röntgen");
     insertVoca(foo, "append", "hinzufügen");
     insertVoca(foo, "Fence", "Zaun");
+    insertVoca(foo, "Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz", "Pneumonoultramicroscopicsilicovolcanoconiosis");
     
     printf("%s\n",getSortedListGerman(foo));
     printf("%s\n",getSortedListGerman(foo));
