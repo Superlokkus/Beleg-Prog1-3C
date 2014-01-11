@@ -21,14 +21,14 @@ int gerCmp(void *first, void *second)
     const wordpair *wfirst = (const wordpair *)first;
     const wordpair *wsecond = (const wordpair *)second;
     
-    return strcmp(wfirst->german, wsecond->german);
+    return strcasecmp(wfirst->german, wsecond->german);
 }
 int engCmp(void *first,void *second)
 {
     const wordpair *wfirst = (const wordpair *)first;
     const wordpair *wsecond = (const wordpair *)second;
     
-    return strcmp(wfirst->english, wsecond->english);
+    return strcasecmp(wfirst->english, wsecond->english);
 }
 
 vocalist* newVocaList(void)
