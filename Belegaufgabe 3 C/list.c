@@ -244,6 +244,7 @@ int addItemToList (tList* pList,void * pItem,int(*fcmp)(void*pItList,void*pItNew
     //List empty?
     if (pList->head == NULL) {
         insertHead(pList, pItem);
+        return OK;
     }
     
     //Corner cases
