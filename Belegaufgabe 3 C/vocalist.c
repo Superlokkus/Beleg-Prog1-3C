@@ -129,7 +129,7 @@ char* getGerman(vocalist *list,const char* english)
 }
 char* getSortedListGerman(const vocalist *tobelisted)
 {
-    char *gerlist; //Momomo-Monster listlistlist...
+    char *gerlist; //Momomo-Monster listlistlist... Todo But how to free?!
     const char delimiter[] = {" "};
     const char pairdelimiter[] = {"\n"};
     
@@ -166,5 +166,45 @@ char* getSortedListGerman(const vocalist *tobelisted)
     }
     return gerlist;
 }
+char* getSortedListEnglish(const vocalist *tobelisted)
+{
+    char *englist; //Momomo-Monster listlistlist... Todo But how to free?!
+    const char delimiter[] = {" "};
+    const char pairdelimiter[] = {"\n"};
+    
+    if (getFirst(tobelisted->engList) == NULL) {
+        return NULL;
+    }
+    
+    //Allocating of the first element
+    wordpair *mywordpair = (wordpair *) getFirst(tobelisted->engList);
+    
+    englist = malloc(sizeof(mywordpair->english) + sizeof(delimiter) + sizeof(mywordpair->german) + sizeof(pairdelimiter)); //Maybe -2 *sizeof(char) because we won't have 3 \0
+    
+    //Building of the first element
+    (void) stpcpy(englist, mywordpair->english);
+    (void) strcat(englist, delimiter);
+    (void) strcat(englist, mywordpair->german);
+    (void) strcat(englist, pairdelimiter);
+    
+    //and the possible rest
+    tobelisted->engList->current = tobelisted->engList->head;
+    while (tobelisted->engList->current->next != NULL) {
+        mywordpair = getNext(tobelisted->engList);
+        
+        englist = realloc(englist, sizeof(englist)
+                          + sizeof(mywordpair->english) + sizeof(delimiter) + sizeof(mywordpair->german) +sizeof(pairdelimiter));
+        if (englist == NULL) {
+            return NULL;
+        }
+        
+        (void) strcat(englist, mywordpair->english);
+        (void) strcat(englist, delimiter);
+        (void) strcat(englist, mywordpair->german);
+        (void) strcat(englist, pairdelimiter);
+    }
+    return englist;
+}
+
 
 

@@ -27,11 +27,10 @@ int main(int argc, const char * argv[])
     insertVoca(foo, "append", "hinzufügen");
     insertVoca(foo, "Fence", "Zaun");
     
-   
-    printf("%s\n",getGerman(foo, "append"));
-    printf("%s\n",getEnglish(foo, "Haus"));
-    
     printf("%s\n",getSortedListGerman(foo));
+    printf("%s\n",getSortedListGerman(foo));
+    
+    printf("%s\n",getSortedListEnglish(foo));
     
     //void UILoop();
     
