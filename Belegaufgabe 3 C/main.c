@@ -28,11 +28,20 @@ int main(int argc, const char * argv[])
     insertVoca(foo, "Fence", "Zaun");
     insertVoca(foo, "Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz", "Pneumonoultramicroscopicsilicovolcanoconiosis");
     
-    printf("%s\n", getEnglish(foo, "Katze"));
-    printf("%s\n",createSortedListGerman(foo));
-    printf("%s\n",createSortedListGerman(foo));
     
-    printf("%s\n",createSortedListEnglish(foo));
+    printf("%s\n", getEnglish(foo, "Katze"));
+    
+    char *barger = createSortedListGerman(foo);
+    printf("%s",barger);
+    free(barger);
+    
+    deleteVoca(foo, "X-Ray", "Röntgen");
+    
+    char *bareng = createSortedListEnglish(foo);
+    printf("%s",bareng);
+    free(bareng);
+    
+    
     
     //void UILoop();
     

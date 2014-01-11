@@ -161,16 +161,13 @@ void removeItem(tList* pList)
         pList->current->next->prev = NULL;
         pList->head = pList->current->next;
     }
-    else
-    {
-        pList->current->next->prev = pList->current->prev;
-    }
-    if (pList->current == pList->tail) {
+    else if (pList->current == pList->tail) {
         pList->current->prev->next = NULL;
         pList->tail = pList->current;
     }
     else
     {
+        pList->current->next->prev = pList->current->prev;
         pList->current->prev->next = pList->current->next;
     }
     
