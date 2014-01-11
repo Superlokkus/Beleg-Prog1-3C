@@ -41,6 +41,12 @@ int main(int argc, const char * argv[])
     printf("%s",bareng);
     free(bareng);
     
+    deleteVoca(foo, "House", getGerman(foo, "House"));
+    deleteVoca(foo, "Cat", getGerman(foo, "Cat"));
+    deleteVoca(foo, "append", getGerman(foo, "append"));
+    deleteVoca(foo, "Fence", getGerman(foo, "Fence"));
+    deleteVoca(foo, "Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz", getGerman(foo, "Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz"));
+    
     
     
     //void UILoop();

@@ -148,13 +148,14 @@ int insertTail (tList* pList, void *pItemIns)
 
 void removeItem(tList* pList)
 {
-    if (pList->current == NULL) {
+    if (pList->current == NULL) {//Invalid call
         return;
     }
     if (pList->current == pList->head && pList->current == pList->tail) {
         //Last item in list
         free(pList->current);
-        pList->current = NULL; pList->head = NULL; pList->tail = NULL; //There should not be a need to handle this elsewhere
+        pList->current = NULL; pList->head = NULL; pList->tail = NULL;
+        return; //There should not be a need to handle this elsewhere
     }
     
     if (pList->current == pList->head) {
@@ -163,7 +164,7 @@ void removeItem(tList* pList)
     }
     else if (pList->current == pList->tail) {
         pList->current->prev->next = NULL;
-        pList->tail = pList->current;
+        pList->tail = pList->current->prev;
     }
     else
     {
