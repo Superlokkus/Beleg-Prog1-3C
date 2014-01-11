@@ -68,14 +68,14 @@ _Bool insertVoca(vocalist *list, const char *english, const char *german)
         return false;
     }
     
-    newwordpair->english = malloc(sizeof(english));
+    newwordpair->english = malloc(sizeof(char)*(strlen(english)+1));
     if (newwordpair->english == NULL) {
         free(newwordpair);
         return false;
     }
     strcpy(newwordpair->english, english);
     
-    newwordpair->german = malloc(sizeof(german));
+    newwordpair->german = malloc((strlen(german)+1) * sizeof(char));
     if (newwordpair->german == NULL) {
         free(newwordpair->english);
         free(newwordpair);
