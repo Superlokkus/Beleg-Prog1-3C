@@ -27,10 +27,8 @@ int main(int argc, const char * argv[])
     insertVoca(foo, "append", "hinzufügen");
     insertVoca(foo, "Fence", "Zaun");
     
-    printf("%s\n",getEnglish(foo, "Haus"));
-    printf("%s\n",getEnglish(foo, "Katze"));
-    printf("%s\n",getGerman(foo, "Cat"));
-    printf("%s\n",getGerman(foo, "House"));
+   
+    printf("%s\n",getGerman(foo, "append"));
     
     printf("%s\n",getSortedListGerman(foo));
     
