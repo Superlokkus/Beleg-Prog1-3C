@@ -99,7 +99,7 @@ char* getEnglish(vocalist *list,const char* german)
     list->gerList->current = list->gerList->head;
     wordpair *mywordpair = (wordpair *) getSelected(list->gerList);
     if (strcmp(mywordpair->german, german) == 0) {
-        return mywordpair->english;;
+        return mywordpair->english;
     }
 
     while(true) { //Infinite loop danger
