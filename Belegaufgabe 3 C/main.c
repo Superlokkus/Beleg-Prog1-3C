@@ -23,9 +23,15 @@ int main(int argc, const char * argv[])
     vocalist *foo = newVocaList();
     insertVoca(foo, "House", "Haus");
     insertVoca(foo, "Cat", "Katze");
+    insertVoca(foo, "X-Ray", "Röntgen");
+    insertVoca(foo, "Append", "Hinzufügen");
     
     printf("%s\n",getEnglish(foo, "Haus"));
     printf("%s\n",getEnglish(foo, "Katze"));
+    printf("%s\n",getGerman(foo, "Cat"));
+    printf("%s\n",getGerman(foo, "House"));
+    
+    printf("%s\n",getSortedListGerman(foo));
     
     //void UILoop();
     

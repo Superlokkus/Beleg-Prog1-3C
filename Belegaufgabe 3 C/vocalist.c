@@ -110,4 +110,63 @@ char* getEnglish(vocalist *list,const char* german)
             return mywordpair->english;
     }
 }
+/*! @bug Returns NULL instead of word in some cases
+ @todo Fix bug
+ */
+char* getGerman(vocalist *list,const char* english)
+{
+    list->engList->current = list->engList->head;
+    if (strcmp(getFirst(list->engList), english) == 0) {
+        return getFirst(list->engList);
+    }
+    
+    while(true) { //Infinite loop danger
+        if (getNext(list->engList) == NULL) {
+            return NULL;
+        }
+        wordpair *mywordpair = (wordpair *) getSelected(list->engList);
+        if(strcmp(mywordpair->english, english) == 0)
+            return mywordpair->german;
+    }
+}
+char* getSortedListGerman(const vocalist *tobelisted)
+{
+    char *gerlist; //Momomo-Monster listlistlist...
+    const char delimiter[] = {" "};
+    const char pairdelimiter[] = {"\n"};
+    
+    if (getFirst(tobelisted->gerList) == NULL) {
+        return NULL;
+    }
+    
+    //Allocating of the first element
+    wordpair *mywordpair = (wordpair *) getFirst(tobelisted->gerList);
+    
+    gerlist = malloc(sizeof(mywordpair->german) + sizeof(delimiter) + sizeof(mywordpair->english) + sizeof(pairdelimiter)); //Maybe -2 *sizeof(char) because we won't have 3 \0
+    
+    //Building of the first element
+    (void) stpcpy(gerlist, mywordpair->german);
+    (void) strcat(gerlist, delimiter);
+    (void) strcat(gerlist, mywordpair->english);
+    (void) strcat(gerlist, pairdelimiter);
+    
+    //and the possible rest
+    tobelisted->gerList->current = tobelisted->gerList->head;
+    while (tobelisted->gerList->current->next != NULL) {
+        mywordpair = getNext(tobelisted->gerList);
+        
+        gerlist = realloc(gerlist, sizeof(gerlist)
+                + sizeof(mywordpair->german) + sizeof(delimiter) + sizeof(mywordpair->english) +sizeof(pairdelimiter));
+        if (gerlist == NULL) {
+            return NULL;
+        }
+        
+        (void) strcat(gerlist, mywordpair->german);
+        (void) strcat(gerlist, delimiter);
+        (void) strcat(gerlist, mywordpair->english);
+        (void) strcat(gerlist, pairdelimiter);
+    }
+    return gerlist;
+}
+
 

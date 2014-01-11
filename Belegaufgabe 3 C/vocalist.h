@@ -41,7 +41,11 @@ _Bool deleteVoca(vocalist *list,const char *english, const char *german); //Sear
 char* getGerman(vocalist *list,const char* english); //Returns NULL if not found
 char* getEnglish(vocalist *list,const char* german); //Retruns NULL if not found
 
-char* getSortedListGerman(const vocalist *tobelisted);//Arrangement <german> <english> \n Subject may to change: Whitespace delimited
+/*! @brief To get the whole dictionary sorted lexically by the german words
+@returns <German> <whitespace> <English> <\n>
+ @remakrs Delimiter may be changed in the future
+*/
+char* getSortedListGerman(const vocalist *tobelisted);
 char* getSortedListEnglish(const vocalist *tobelisted);//Arrangement <german> <english> \n Subject may to change: Whitespace delimited
 
 
