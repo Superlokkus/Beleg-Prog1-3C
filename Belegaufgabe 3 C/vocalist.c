@@ -155,11 +155,14 @@ char* createSortedListGerman(const vocalist *tobelisted)
     while (tobelisted->gerList->current->next != NULL) {
         mywordpair = getNext(tobelisted->gerList);
         
+        char *tmp = gerlist;
         gerlist = realloc(gerlist, (strlen(gerlist)
                 + strlen(mywordpair->german) + strlen(delimiter) + strlen(mywordpair->english) + strlen(pairdelimiter) +1 ) * sizeof(char));
         if (gerlist == NULL) {
+            free(tmp); //Could use reallocf() which is, to bad, FreeBSD specific
             return NULL;
         }
+        
         
         strcat(gerlist, mywordpair->german);
         strcat(gerlist, delimiter);
@@ -198,9 +201,11 @@ char* createSortedListEnglish(const vocalist *tobelisted)
     while (tobelisted->engList->current->next != NULL) {
         mywordpair = getNext(tobelisted->engList);
         
+        char *tmp = englist;
         englist = realloc(englist, (strlen(englist)
                           + strlen(mywordpair->english) + strlen(delimiter) + strlen(mywordpair->german) + strlen(pairdelimiter) +1 ) * sizeof(char));
         if (englist == NULL) {
+            free(tmp);
             return NULL;
         }
         

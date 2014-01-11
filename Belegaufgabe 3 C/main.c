@@ -47,7 +47,7 @@ int main(int argc, const char * argv[])
     deleteVoca(foo, "Fence", getGerman(foo, "Fence"));
     deleteVoca(foo, "Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz", getGerman(foo, "Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz"));
     
-    
+    deleteVocaList(foo);
     
     //void UILoop();
     
