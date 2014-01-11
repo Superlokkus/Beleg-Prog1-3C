@@ -1,3 +1,6 @@
+//Name: Markus Klemm
+//Studiengruppe: 13/041/01
+//MatrNr: 36438
 //
 //  vocalist.c
 //  Belegaufgabe 3 C
@@ -205,7 +208,7 @@ char* createSortedListEnglish(const vocalist *tobelisted)
         englist = realloc(englist, (strlen(englist)
                           + strlen(mywordpair->english) + strlen(delimiter) + strlen(mywordpair->german) + strlen(pairdelimiter) +1 ) * sizeof(char));
         if (englist == NULL) {
-            free(tmp);
+            free(tmp); //Could use reallocf() which is, to bad, FreeBSD specific
             return NULL;
         }
         
