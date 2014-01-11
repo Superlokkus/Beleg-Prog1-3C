@@ -262,12 +262,11 @@ int addItemToList (tList* pList,void * pItem,int(*fcmp)(void*pItList,void*pItNew
     }
     //End corner cases (head needed, tail for optimization)
     
-    tCnct *oldsavedcurrent = pList->current;
+    pList->current = pList->head;
     while (fcmp(pItem,getNext(pList)) >0);
     if (insertBefore(pList, pItem) != OK) {
         return FAIL;
     }
-    pList->current = oldsavedcurrent;
     return OK;
 }
 
