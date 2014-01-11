@@ -140,11 +140,15 @@ char* getSortedListGerman(const vocalist *tobelisted)
     
     gerlist = malloc(sizeof(mywordpair->german) + sizeof(delimiter) + sizeof(mywordpair->english) + sizeof(pairdelimiter)); //Maybe -2 *sizeof(char) because we won't have 3 \0
     
+    if (gerlist == NULL) {
+        return NULL;
+    }
+    
     //Building of the first element
-    (void) stpcpy(gerlist, mywordpair->german);
-    (void) strcat(gerlist, delimiter);
-    (void) strcat(gerlist, mywordpair->english);
-    (void) strcat(gerlist, pairdelimiter);
+    strcpy(gerlist, mywordpair->german);
+    strcat(gerlist, delimiter);
+    strcat(gerlist, mywordpair->english);
+    strcat(gerlist, pairdelimiter);
     
     //and the possible rest
     tobelisted->gerList->current = tobelisted->gerList->head;
@@ -157,10 +161,10 @@ char* getSortedListGerman(const vocalist *tobelisted)
             return NULL;
         }
         
-        (void) strcat(gerlist, mywordpair->german);
-        (void) strcat(gerlist, delimiter);
-        (void) strcat(gerlist, mywordpair->english);
-        (void) strcat(gerlist, pairdelimiter);
+        strcat(gerlist, mywordpair->german);
+        strcat(gerlist, delimiter);
+        strcat(gerlist, mywordpair->english);
+        strcat(gerlist, pairdelimiter);
     }
     return gerlist;
 }
@@ -179,11 +183,15 @@ char* getSortedListEnglish(const vocalist *tobelisted)
     
     englist = malloc(sizeof(mywordpair->english) + sizeof(delimiter) + sizeof(mywordpair->german) + sizeof(pairdelimiter)); //Maybe -2 *sizeof(char) because we won't have 3 \0
     
+    if (englist == NULL) {
+        return NULL;
+    }
+    
     //Building of the first element
-    (void) stpcpy(englist, mywordpair->english);
-    (void) strcat(englist, delimiter);
-    (void) strcat(englist, mywordpair->german);
-    (void) strcat(englist, pairdelimiter);
+    strcpy(englist, mywordpair->english);
+    strcat(englist, delimiter);
+    strcat(englist, mywordpair->german);
+    strcat(englist, pairdelimiter);
     
     //and the possible rest
     tobelisted->engList->current = tobelisted->engList->head;
@@ -196,10 +204,10 @@ char* getSortedListEnglish(const vocalist *tobelisted)
             return NULL;
         }
         
-        (void) strcat(englist, mywordpair->english);
-        (void) strcat(englist, delimiter);
-        (void) strcat(englist, mywordpair->german);
-        (void) strcat(englist, pairdelimiter);
+        strcat(englist, mywordpair->english);
+        strcat(englist, delimiter);
+        strcat(englist, mywordpair->german);
+        strcat(englist, pairdelimiter);
     }
     return englist;
 }
