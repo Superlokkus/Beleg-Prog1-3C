@@ -12,6 +12,7 @@
 #ifndef Belegaufgabe_3_C_ui_h
 #define Belegaufgabe_3_C_ui_h
 
-void UILoop(void);
+void UILoop(FILE *dic);
+
 
 #endif

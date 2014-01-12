@@ -11,6 +11,7 @@
 		28231453185724F700388556 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 28231452185724F700388556 /* main.c */; };
 		28231455185724F700388556 /* Belegaufgabe_3_C.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 28231454185724F700388556 /* Belegaufgabe_3_C.1 */; };
 		28DFB8F3187C2D1D0062BD82 /* vocalist.c in Sources */ = {isa = PBXBuildFile; fileRef = 28DFB8F2187C2D1D0062BD82 /* vocalist.c */; };
+		28F1693F1881E27600C6F79A /* ui.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F1693E1881E27600C6F79A /* ui.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +37,7 @@
 		28DFB8EE187BEB620062BD82 /* ui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ui.h; sourceTree = "<group>"; };
 		28DFB8F1187C1B050062BD82 /* vocalist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vocalist.h; sourceTree = "<group>"; };
 		28DFB8F2187C2D1D0062BD82 /* vocalist.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vocalist.c; sourceTree = "<group>"; };
+		28F1693E1881E27600C6F79A /* ui.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ui.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				28DFB8F1187C1B050062BD82 /* vocalist.h */,
 				28DFB8F2187C2D1D0062BD82 /* vocalist.c */,
 				28DFB8EE187BEB620062BD82 /* ui.h */,
+				28F1693E1881E27600C6F79A /* ui.c */,
 				2823145B1857252400388556 /* Aufgabenstellung */,
 				2823145C1857258300388556 /* list.h */,
 				2817369018771AC500D389EB /* list.c */,
@@ -134,6 +137,7 @@
 				28231453185724F700388556 /* main.c in Sources */,
 				2817369118771AC500D389EB /* list.c in Sources */,
 				28DFB8F3187C2D1D0062BD82 /* vocalist.c in Sources */,
+				28F1693F1881E27600C6F79A /* ui.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
