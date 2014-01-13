@@ -31,11 +31,23 @@ typedef struct {
     tList *gerList;
 }vocalist;
 
-
-vocalist* newVocaList(void); //Returns NULL if allocation fails
+/*! @brief Creates a new vocalist.
+ @returns NULL if allocation fails otherwise a fresh and tasty vocalist
+ */
+vocalist* newVocaList(void);
+/*! @brief Deletes the given, hopefully empty, vocalist.
+ @returns False if given list is not empty, otherwise true
+ @param *tobedeleted Empty list which has to be deleted
+ */
 _Bool deleteVocaList(vocalist *tobedeleted); //delete empty vocalist
 
-_Bool insertVoca(vocalist *list, const char *english, const char *german); //Returns success==1 or fail==0
+/*! @brief Add new vocabulary, consisting of an english and german word, to the given list
+ @returns True if adding was sucessfull or false if not.
+ @param *list Vocalist the words are to be added
+ @param *english English word
+ @param *german German translation word
+ */
+_Bool insertVoca(vocalist *list, const char *english, const char *german);
 _Bool deleteVoca(vocalist *list,const char *english, const char *german); //Search and delete in List
 
 char* getGerman(vocalist *list,const char* english); //Returns NULL if not found

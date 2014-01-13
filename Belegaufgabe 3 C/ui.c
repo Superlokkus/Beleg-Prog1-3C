@@ -16,6 +16,7 @@
 #include <errno.h>
 #include <string.h>
 #include <stdarg.h>
+#include "vocalist.h"
 #if __STDC_VERSION__ >= 199901L
 #include <stdbool.h>
 #else
@@ -35,6 +36,9 @@ void printsomeemptylines(void); //Can't use posix or >C90 functions or curses, b
  @returns False if User wants to quit, else true.
  */
 _Bool AwtProcCommand(enum language error_lang);
+/*! @brief Querys user to type in a new translation
+ */
+_Bool readAndInsertTrans(enum language menu_lang,vocalist *dict);
 
 void UILoop(FILE *dic)
 {
@@ -66,18 +70,29 @@ void UILoop(FILE *dic)
                 menu_lang = english;
                 break;
         }
-        printsomeemptylines();
-        
-        _Bool Quit = true;
-        
-        do {
-            printMenu(menu_lang);
-            if (AwtProcCommand(menu_lang))
-                Quit = false;
-            else
-                Quit = true;
-        } while (!Quit);
     }
+    printsomeemptylines();
+        
+    //Init. of UI done
+        
+    //Dictionary/Filehandling
+    vocalist *dictionary = newVocaList();
+        
+    _Bool Quit = true;
+    do { //main UI Loop
+        printMenu(menu_lang);
+        if (AwtProcCommand(menu_lang))
+            Quit = false;
+        else
+            Quit = true;
+        printsomeemptylines();
+    } while (!Quit);
+    
+    if (!deleteVocaList(dictionary))
+    {
+        //Todo delete remaining vocas and delete again
+    }
+    
 }
 
 void printMenu(enum language menu_lang)

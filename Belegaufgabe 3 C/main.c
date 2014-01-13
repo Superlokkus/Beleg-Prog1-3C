@@ -77,7 +77,10 @@ int main(int argc, const char * argv[])
 
     UILoop(dictionary);
     
+    if (!fclose(dictionary))
+        perror(NULL); //I wonder if that ever happens
     free(filename);
+    
     
     return 0;
 }
