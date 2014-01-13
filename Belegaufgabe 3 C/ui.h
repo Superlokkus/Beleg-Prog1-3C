@@ -11,11 +11,12 @@
 
 #ifndef Belegaufgabe_3_C_ui_h
 #define Belegaufgabe_3_C_ui_h
+#include "vocalist.h"
 
 /*! @brief starts text user interface
  @param *dic File which should be used for loading and saveing the dictionary
  */
-void UILoop(FILE *dic);
+void UILoop(vocalist *dictionary);
 
 
 #endif

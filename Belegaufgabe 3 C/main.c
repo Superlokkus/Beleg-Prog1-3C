@@ -42,7 +42,7 @@ int main(int argc, const char * argv[])
     filenamepos = optind; //Filename is at the moment always last option, but maybe filename handling will be changed
     
     //Opening/Creating dictionary
-    FILE *dictionary;
+    FILE *fdictionary;
     char *filename;
     if (argv[filenamepos] == NULL) {
         filename = malloc((strlen(argv[0])+strlen(".dic") +1) * sizeof(char));
@@ -61,10 +61,10 @@ int main(int argc, const char * argv[])
         strcpy(filename, argv[filenamepos]);
     }
     
-    if ( (dictionary = fopen(filename, "r+")) == NULL)
+    if ( (fdictionary = fopen(filename, "r+")) == NULL)
     {
         if (errno == ENOENT) {
-            if ((dictionary = fopen(filename, "w+")) == NULL) {
+            if ((fdictionary = fopen(filename, "w+")) == NULL) {
                 perror("Could not open nor create a new file, because");
                 return EXIT_FAILURE;
             }
@@ -75,11 +75,17 @@ int main(int argc, const char * argv[])
         }
     }
 
-    UILoop(dictionary);
+    vocalist *vdictionary = newVocaList();
+    UILoop(vdictionary);
     
-    if (!fclose(dictionary))
+    if (!fclose(fdictionary))
         perror(NULL); //I wonder if that ever happens
     free(filename);
+    
+    if (!deleteVocaList(vdictionary)) {
+        fprintf(stderr, "Who cares, OS cleans up anyway, but TODO");
+    }
+    
     
     
     return 0;

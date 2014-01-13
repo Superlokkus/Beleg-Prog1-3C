@@ -16,7 +16,6 @@
 #include <errno.h>
 #include <string.h>
 #include <stdarg.h>
-#include "vocalist.h"
 #if __STDC_VERSION__ >= 199901L
 #include <stdbool.h>
 #else
@@ -58,7 +57,7 @@ void searchinseekndestroyEng(enum language menu_lang, vocalist *tokkndin);
 
 
 
-void UILoop(FILE *dic)
+void UILoop(vocalist *dictionary)
 {
     printf("German English Dictionary using double linked lists\n Coded by MarkusKlemm.net\n");
     printf("Please select your language: (E)nglish or (D)eutsch ");
@@ -93,8 +92,8 @@ void UILoop(FILE *dic)
         
     //Init. of UI done
         
-    //Dictionary/Filehandling
-    vocalist *dictionary = newVocaList();
+    
+    
     printMenu(menu_lang);
     _Bool Quit = true;
     do { //main UI Loop
@@ -105,11 +104,6 @@ void UILoop(FILE *dic)
             Quit = true;
         printsomeemptylines();
     } while (!Quit);
-    
-    if (!deleteVocaList(dictionary))
-    {
-        //Todo delete remaining vocas and delete again
-    }
     
 }
 
