@@ -31,14 +31,26 @@ enum language {
 };
 
 void printMenu(enum language menu_lang);
-void printsomeemptylines(void); //Can't use posix or >C90 functions or curses, because task is portable code even on windows
+
+void printsomeemptylines(void); //Can't use posix or >C90 functions or curses, because task is  to be portable code even on windows
 /*! @brief Get user input and call acording function
+ @param menu_lang Language for errors and called functions
+ @param *dict Dictionary to be used by the called functions
  @returns False if User wants to quit, else true.
  */
-_Bool AwtProcCommand(enum language error_lang);
-/*! @brief Querys user to type in a new translation
+_Bool AwtProcCommand(enum language menu_lang,vocalist *dict);
+
+/*! @brief Querys user to type in a new translation and adds it to the given dictionary
+ @returns False iff adding fails, otherwise true.
+ @param menu_lang Language for query interaction text with user
+ @param *dict Dictionary aka vocalist in which the new translation should be added to
  */
 _Bool readAndInsertTrans(enum language menu_lang,vocalist *dict);
+
+void printListGer(enum language menu_lang, const vocalist *toprint);
+void printListEng(enum language menu_lang, const vocalist *toprint);
+
+
 
 void UILoop(FILE *dic)
 {
@@ -77,11 +89,11 @@ void UILoop(FILE *dic)
         
     //Dictionary/Filehandling
     vocalist *dictionary = newVocaList();
-        
+    printMenu(menu_lang);
     _Bool Quit = true;
     do { //main UI Loop
-        printMenu(menu_lang);
-        if (AwtProcCommand(menu_lang))
+        
+        if (AwtProcCommand(menu_lang, dictionary))
             Quit = false;
         else
             Quit = true;
@@ -124,7 +136,7 @@ void printMenu(enum language menu_lang)
         printf("(Q)uit and Save\n");
     }
 }
-_Bool AwtProcCommand(enum language error_lang)
+_Bool AwtProcCommand(enum language menu_lang, vocalist *dict)
 {
     int i;
     for (i=0; i<5; i++) {
@@ -132,7 +144,7 @@ _Bool AwtProcCommand(enum language error_lang)
         char rawbuff[32]; fgets(rawbuff, 32, stdin);
         char *buff = strpbrk(rawbuff, "IiSsGgEeLlDdQqMm");
         if (buff == NULL) {
-            if (error_lang == german) {
+            if (menu_lang == german) {
                 printf("\a Ungültige Eingabe, Beende nach %d weiteren ungültigen Eingaben\n",4-i);
                 printf("Geben Sie \"M\" ein um erneut das Menü aufzurufen.\n");
             }
@@ -147,9 +159,35 @@ _Bool AwtProcCommand(enum language error_lang)
             switch (flag[0]) {
                 case 'M':
                 case 'm':
+                    printMenu(menu_lang);
                     return true;
                     break;
-                    
+                case 'I':
+                case 'i':
+                    if (!readAndInsertTrans(menu_lang, dict)) {
+                        exit(EXIT_FAILURE);
+                    }
+                    return true;
+                    break;
+                case 'L':
+                case 'l':
+                    switch (flag[1]) {
+                        case 'G':
+                        case 'g':
+                            printListGer(menu_lang, dict);
+                            return true;
+                            break;
+                        case 'E':
+                        case 'e':
+                            printListEng(menu_lang, dict);
+                            return true;
+                            break;
+                            
+                        default:
+                            return true;
+                            break;
+                    }
+            
                 default:
                     return false;
                     break;
@@ -163,5 +201,35 @@ _Bool AwtProcCommand(enum language error_lang)
 void printsomeemptylines(void)
 {
     printf("********************\n");
-    printf("\n\n\n\n\n\n");
+    printf("\n\n");
+}
+_Bool readAndInsertTrans(enum language menu_lang,vocalist *dict)
+{
+    printf((menu_lang == german)?"Bitte geben Sie das englische Wort ein: ":"Please type in the english word: ");
+    char buffEng[512];
+    fgets(buffEng, 512, stdin);
+    printf((menu_lang == german)?"Bitte geben Sie das deutsche Übersetzung ein: ":"Please type in the german translation: ");
+    char buffGer[512];
+    fgets(buffGer, 512, stdin);
+    if (!insertVoca(dict, buffEng, buffGer)) {
+        return false;
+    }
+    return true;
+}
+void printListGer(enum language menu_lang, const vocalist *toprint)
+{
+    char seperator[] = {"   --   "};
+    printf((menu_lang == german)?"Deutsch%sEnglisch\n":"German%sEnglish\n" ,seperator);
+    char *list = createSortedListGerman(toprint, seperator, "\n");
+    printf("%s",list);
+    free(list);
+}
+void printListEng(enum language menu_lang, const vocalist *toprint)
+{
+    char seperator[] = {"   --   "};
+    printf((menu_lang == german)?"Englisch%sDeutsch\n":"English%sGerman\n" ,seperator);
+    char *list = createSortedListEnglish(toprint, seperator, "\n");
+    printf("%s",list);
+    free(list);
+
 }

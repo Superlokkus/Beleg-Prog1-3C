@@ -55,15 +55,13 @@ char* getEnglish(vocalist *list,const char* german); //Retruns NULL if not found
 
 /*! @brief To get the whole dictionary sorted lexically by the german words
 @returns Pointer to a char with format <German> <whitespace> <English> <\n>
- @remarks Delimiters may be changed in the future
  @warning Potential memory leak: The application is responsible to free() the returned char* after use.
 */
-char* createSortedListGerman(const vocalist *tobelisted);
+char* createSortedListGerman(const vocalist *tobelisted, char delimiter[],char pairdelimiter[]);
 /*! @brief To get the whole dictionary sorted lexically by the english words
  @returns Pointer to a char with format <English> <Whitespace> <German> <\n>
- @remarks Delimiters may be changed in the future
  @warning Potential memory leak: The application is responsible to free() the returned char* after use.
  */
-char* createSortedListEnglish(const vocalist *tobelisted);
+char* createSortedListEnglish(const vocalist *tobelisted, char delimiter[],char pairdelimiter[]);
 
 #endif

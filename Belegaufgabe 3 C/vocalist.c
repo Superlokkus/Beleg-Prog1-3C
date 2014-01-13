@@ -128,11 +128,9 @@ char* getGerman(vocalist *list,const char* english)
     }
     return NULL;
 }
-char* createSortedListGerman(const vocalist *tobelisted)
+char* createSortedListGerman(const vocalist *tobelisted, char delimiter[], char pairdelimiter[])
 {
     char *gerlist; //strcat spree spree spree...
-    const char delimiter[] = {" "};
-    const char pairdelimiter[] = {"\n"};
     
     if (getFirst(tobelisted->gerList) == NULL) {
         return NULL;
@@ -174,12 +172,9 @@ char* createSortedListGerman(const vocalist *tobelisted)
     }
     return gerlist;
 }
-char* createSortedListEnglish(const vocalist *tobelisted)
+char* createSortedListEnglish(const vocalist *tobelisted, char delimiter[], char pairdelimiter[])
 {
     char *englist; //strcat spree spree spree...
-    const char delimiter[] = {" "};
-    const char pairdelimiter[] = {"\n"};
-    
     if (getFirst(tobelisted->engList) == NULL) {
         return NULL;
     }
