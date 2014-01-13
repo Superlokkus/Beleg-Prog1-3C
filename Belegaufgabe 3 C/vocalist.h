@@ -48,10 +48,13 @@ _Bool deleteVocaList(vocalist *tobedeleted); //delete empty vocalist
  @param *german German translation word
  */
 _Bool insertVoca(vocalist *list, const char *english, const char *german);
-_Bool deleteVoca(vocalist *list,const char *english, const char *german); //Search and delete in List
+/*! @brief Search and delete vocabulary in given list
+ @returns False if vocabulary can't be found
+ */
+_Bool deleteVoca(vocalist *list,const char *english, const char *german);
 
-char* getGerman(vocalist *list,const char* english); //Returns NULL if not found
-char* getEnglish(vocalist *list,const char* german); //Retruns NULL if not found
+char* getGerman(const vocalist *list,const char* english); //Returns NULL if not found
+char* getEnglish(const vocalist *list,const char* german); //Retruns NULL if not found
 
 /*! @brief To get the whole dictionary sorted lexically by the german words
 @returns Pointer to a char with format <German> <whitespace> <English> <\n>

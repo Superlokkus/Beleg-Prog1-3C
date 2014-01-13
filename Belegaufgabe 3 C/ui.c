@@ -29,6 +29,7 @@ enum language {
     english = 1,
     german = 0
 };
+#define bufflen 1024
 
 void printMenu(enum language menu_lang);
 
@@ -49,6 +50,11 @@ _Bool readAndInsertTrans(enum language menu_lang,vocalist *dict);
 
 void printListGer(enum language menu_lang, const vocalist *toprint);
 void printListEng(enum language menu_lang, const vocalist *toprint);
+void searchGer(enum language menu_lang,const vocalist *tosearchin);
+void searchEng(enum language menu_lang,const vocalist *tosearchin);
+void searchinseekndestroyGer(enum language menu_lang, vocalist *tokkndin);
+void searchinseekndestroyEng(enum language menu_lang, vocalist *tokkndin);
+
 
 
 
@@ -119,7 +125,9 @@ void printMenu(enum language menu_lang)
         printf("(L..)iste Übersetzungen anhand:\n");
         printf("    (..G)Deutscher Begriffe\n");
         printf("    (..E)nglischer Begriffe\n");
-        printf("(D)Lösche Übersetzung\n");
+        printf("(D..)Lösche Übersetzung anhand:\n");
+        printf("    (..G)Deutscher Begriffe\n");
+        printf("    (..E)nglischer Begriffe\n");
         printf("(Q)Beende und Speichere\n");
     }
     else {
@@ -132,7 +140,9 @@ void printMenu(enum language menu_lang)
         printf("(L..)ist translations by:\n");
         printf("    (..G)erman words\n");
         printf("    (..E)nglish words\n");
-        printf("(D)elete translation\n");
+        printf("(D..)elete translation\n");
+        printf("    (..G)erman words\n");
+        printf("    (..E)nglish words\n");
         printf("(Q)uit and Save\n");
     }
 }
@@ -169,6 +179,24 @@ _Bool AwtProcCommand(enum language menu_lang, vocalist *dict)
                     }
                     return true;
                     break;
+                case 'S':
+                case 's':
+                    switch (flag[1]) {
+                        case 'G':
+                        case 'g':
+                            searchGer(menu_lang, dict);
+                            return true;
+                            break;
+                        case 'E':
+                        case 'e':
+                            searchEng(menu_lang, dict);
+                            return true;
+                            break;
+                        default:
+                            printf((menu_lang ==german)?"Geben Sie bitte \"SG\" oder \"SE\" ein\n":"Please type either \"SG\" or \"SE\"\n");
+                            return true;
+                            break;
+                    }
                 case 'L':
                 case 'l':
                     switch (flag[1]) {
@@ -184,6 +212,25 @@ _Bool AwtProcCommand(enum language menu_lang, vocalist *dict)
                             break;
                             
                         default:
+                            printf((menu_lang ==german)?"Geben Sie bitte \"LG\" oder \"LE\" ein\n":"Please type either \"LG\" or \"LE\"\n");
+                            return true;
+                            break;
+                    }
+                case 'D':
+                case 'd':
+                    switch (flag[1]) {
+                        case 'G':
+                        case 'g':
+                            searchinseekndestroyGer(menu_lang, dict);
+                            return true;
+                            break;
+                        case 'E':
+                        case 'e':
+                            searchinseekndestroyEng(menu_lang, dict);
+                            return true;
+                            break;
+                        default:
+                            printf((menu_lang ==german)?"Geben Sie bitte \"DG\" oder \"DE\" ein\n":"Please type either \"DG\" or \"DE\"\n");
                             return true;
                             break;
                     }
@@ -206,11 +253,12 @@ void printsomeemptylines(void)
 _Bool readAndInsertTrans(enum language menu_lang,vocalist *dict)
 {
     printf((menu_lang == german)?"Bitte geben Sie das englische Wort ein: ":"Please type in the english word: ");
-    char buffEng[512];
-    fgets(buffEng, 512, stdin);
+    char buffEng[bufflen];
+    fgets(buffEng, bufflen, stdin);
     printf((menu_lang == german)?"Bitte geben Sie das deutsche Übersetzung ein: ":"Please type in the german translation: ");
-    char buffGer[512];
-    fgets(buffGer, 512, stdin);
+    char buffGer[bufflen];
+    fgets(buffGer, bufflen, stdin);
+    buffEng[strlen(buffEng)-1] = '\0'; buffGer[strlen(buffGer)-1] = '\0';
     if (!insertVoca(dict, buffEng, buffGer)) {
         return false;
     }
@@ -233,3 +281,52 @@ void printListEng(enum language menu_lang, const vocalist *toprint)
     free(list);
 
 }
+void searchGer(enum language menu_lang,const vocalist *tosearchin)
+{
+    printf((menu_lang==german)?"Bitte geben Sie das englische Wort ein, dessen deutsche Entsprechung Sie suchen: ":"Please type in the english word which german translation you're looking for: ");
+    char buffeng[bufflen];
+    fgets(buffeng, bufflen, stdin); buffeng[strlen(buffeng)-1] = '\0';
+    char *gerbuff = getGerman(tosearchin, buffeng);
+    if (gerbuff == NULL)
+    {
+        printf((menu_lang == german)?"Übersetzung leider nicht gefunden\n":"Translation unfortunately not found\n");
+        return;
+    }
+    printf("%s\n",gerbuff);
+    
+}
+void searchEng(enum language menu_lang,const vocalist *tosearchin)
+{
+    printf((menu_lang==german)?"Bitte geben Sie das deutsche Wort ein, dessen englische Entsprechung Sie suchen: ":"Please type in the german word which english translation you're looking for: ");
+    char buffger[bufflen];
+    fgets(buffger, bufflen, stdin); buffger[strlen(buffger)-1] = '\0';
+    char *engbuff = getEnglish(tosearchin, buffger);
+    if (engbuff == NULL)
+    {
+        printf((menu_lang == german)?"Übersetzung leider nicht gefunden\n":"Translation unfortunately not found\n");
+        return;
+    }
+    printf("%s\n",engbuff);
+}
+void searchinseekndestroyGer(enum language menu_lang, vocalist *tokkndin)
+{
+    printf((menu_lang==german)?"Bitte geben Sie das deutsche Wort ein, anhand dessen Sie dieses und die Übersetzung löschen wollen: ":"Please type in the german word which translation and itself you want to delete: ");
+    char buffger[bufflen];
+    fgets(buffger, bufflen, stdin); buffger[strlen(buffger)-1] = '\0';
+    if (getEnglish(tokkndin, buffger) == NULL || !deleteVoca(tokkndin, getEnglish(tokkndin, buffger), buffger))
+    {
+        printf((menu_lang == german)?"Übersetzung leider nicht gefunden\n":"Translation unfortunately not found\n");
+    }
+    
+}
+void searchinseekndestroyEng(enum language menu_lang, vocalist *tokkndin)
+{
+    printf((menu_lang==german)?"Bitte geben Sie das englische Wort ein, anhand dessen Sie dieses und die Übersetzung löschen wollen: ":"Please type in the english word which translation and itself you want to delete: ");
+    char buffeng[bufflen];
+    fgets(buffeng, bufflen, stdin); buffeng[strlen(buffeng)-1] = '\0';
+    if (getGerman(tokkndin, buffeng) == NULL || !deleteVoca(tokkndin, buffeng, getGerman(tokkndin, buffeng)))
+    {
+        printf((menu_lang == german)?"Übersetzung leider nicht gefunden\n":"Translation unfortunately not found\n");
+    }
+}
+

@@ -98,7 +98,7 @@ _Bool insertVoca(vocalist *list, const char *english, const char *german)
     }
     return true;
 }
-char* getEnglish(vocalist *list,const char* german)
+char* getEnglish(const vocalist *list,const char* german)
 {
     list->gerList->current = list->gerList->head;
     wordpair *mywordpair = (wordpair *) getSelected(list->gerList);
@@ -113,7 +113,7 @@ char* getEnglish(vocalist *list,const char* german)
     }
     return NULL;
 }
-char* getGerman(vocalist *list,const char* english)
+char* getGerman(const vocalist *list,const char* english)
 {
     list->engList->current = list->engList->head;
     wordpair *mywordpair = (wordpair *) getSelected(list->engList);
