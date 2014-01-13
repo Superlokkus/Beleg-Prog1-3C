@@ -31,6 +31,10 @@ enum language {
 
 void printMenu(enum language menu_lang);
 void printsomeemptylines(void); //Can't use posix or >C90 functions or curses, because task is portable code even on windows
+/*! @brief Get user input and call acording function
+ @returns False if User wants to quit, else true.
+ */
+_Bool AwtProcCommand(enum language error_lang);
 
 void UILoop(FILE *dic)
 {
@@ -38,7 +42,7 @@ void UILoop(FILE *dic)
     printf("Please select your language: (E)nglish or (D)eutsch ");
     
     enum language menu_lang;
-    char raw_buff[128]; fgets(raw_buff, 128, stdin);
+    char raw_buff[32]; fgets(raw_buff, 32, stdin);
     char *buff = strpbrk(raw_buff, "EeDdGg");
     if (buff == NULL) {
         printf("\n Choosing default language: English\n");
@@ -68,6 +72,10 @@ void UILoop(FILE *dic)
         
         do {
             printMenu(menu_lang);
+            if (AwtProcCommand(menu_lang))
+                Quit = false;
+            else
+                Quit = true;
         } while (!Quit);
     }
 }
@@ -76,7 +84,7 @@ void printMenu(enum language menu_lang)
 {
     if (menu_lang == german) {
         printf("Deutsch Englisch Wörterbuch mithilfe doppelt verketteter Listen\n Programmiert von MarkusKlemm.net\n");
-        printf("    Menü:\n");
+        printf("    (M)enü:\n");
         printf("(I)Füge Übersetzung hinzu\n");
         printf("(S..)uche Übersetzung:\n");
         printf("    (..G)Deutsch\n");
@@ -89,7 +97,7 @@ void printMenu(enum language menu_lang)
     }
     else {
         printf("German English Dictionary using double linked lists\n Coded by MarkusKlemm.net\n");
-        printf("    Menu:\n");
+        printf("    (M)enu:\n");
         printf("(I)nput of a new translation\n");
         printf("(S..)earch translation:\n");
         printf("    (..G)erman\n");
@@ -100,6 +108,42 @@ void printMenu(enum language menu_lang)
         printf("(D)elete translation\n");
         printf("(Q)uit and Save\n");
     }
+}
+_Bool AwtProcCommand(enum language error_lang)
+{
+    int i;
+    for (i=0; i<5; i++) {
+        printf("        -> ");
+        char rawbuff[32]; fgets(rawbuff, 32, stdin);
+        char *buff = strpbrk(rawbuff, "IiSsGgEeLlDdQqMm");
+        if (buff == NULL) {
+            if (error_lang == german) {
+                printf("\a Ungültige Eingabe, Beende nach %d weiteren ungültigen Eingaben\n",4-i);
+                printf("Geben Sie \"M\" ein um erneut das Menü aufzurufen.\n");
+            }
+            else {
+                printf("\a Invalid input, exiting after %d further invalid inputs\n",4-i);
+                printf("Type \"M\" to see the menu again.\n");
+            }
+            continue;
+        }
+        else{
+            char flag[3]; strncpy(flag, buff, 2);
+            switch (flag[0]) {
+                case 'M':
+                case 'm':
+                    return true;
+                    break;
+                    
+                default:
+                    return false;
+                    break;
+            }
+            
+        }
+    
+    }
+    return false;
 }
 void printsomeemptylines(void)
 {
