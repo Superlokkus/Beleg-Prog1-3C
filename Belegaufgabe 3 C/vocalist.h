@@ -57,14 +57,19 @@ char* getGerman(const vocalist *list,const char* english); //Returns NULL if not
 char* getEnglish(const vocalist *list,const char* german); //Retruns NULL if not found
 
 /*! @brief To get the whole dictionary sorted lexically by the german words
-@returns Pointer to a char with format <German> <whitespace> <English> <\n>
+@returns Pointer to a char with format <German> <delimiter> <English> <pairdelimiter> or as always NULL if either allocation fails or given list is empty.
  @warning Potential memory leak: The application is responsible to free() the returned char* after use.
 */
 char* createSortedListGerman(const vocalist *tobelisted, char delimiter[],char pairdelimiter[]);
 /*! @brief To get the whole dictionary sorted lexically by the english words
- @returns Pointer to a char with format <English> <Whitespace> <German> <\n>
+ @returns Pointer to a char with format <English> <delimiter> <German> <pairdelimiter> or as always NULL if either allocation fails or given list is empty.
  @warning Potential memory leak: The application is responsible to free() the returned char* after use.
  */
 char* createSortedListEnglish(const vocalist *tobelisted, char delimiter[],char pairdelimiter[]);
+/*! @brief Delete all entrys of the given vocalist and then delete the list itself
+ @returns True if process was complete sucessfull, otherwise false
+ @param *tobekknd List to be emptied and deleted. (Krush Kill 'n Destroy)
+ */
+_Bool emptyAndDeleteVocalist(vocalist *tobekknd);
 
 #endif

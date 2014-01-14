@@ -106,7 +106,7 @@ char* getEnglish(const vocalist *list,const char* german)
         return mywordpair->english;
     }
 
-    while(getNext(list->gerList) != NULL) { //Infinite loop danger
+    while(getNext(list->gerList) != NULL) {
         wordpair *mywordpair = (wordpair *) getSelected(list->gerList);
         if(strcmp(mywordpair->german, german) == 0)
             return mywordpair->english;
@@ -121,7 +121,7 @@ char* getGerman(const vocalist *list,const char* english)
         return mywordpair->german;
     }
     
-    while(getNext(list->engList) != NULL) { //Infinite loop danger
+    while(getNext(list->engList) != NULL) { 
         wordpair *mywordpair = (wordpair *) getSelected(list->engList);
         if(strcmp(mywordpair->english, english) == 0)
             return mywordpair->german;
@@ -223,5 +223,32 @@ _Bool deleteVoca(vocalist *list,const char *english, const char *german)
     return false;
     
 }
-
+_Bool emptyAndDeleteVocalist(vocalist *tobekknd)
+{
+    char *engList = createSortedListEnglish(tobekknd, ";", "\n");
+    if (engList == NULL) {
+        return false;
+    }
+    
+    int i; char *tokeneng; char *tokenger;
+    tokeneng = strtok(engList, ";\n");
+    for (i=2; tokeneng != NULL; i++) {
+        if (i%2 == 0) {
+            tokenger = strtok(NULL, ";\n");
+            if (!deleteVoca(tobekknd, tokeneng, tokenger))
+                return false;
+        }
+        else {
+            tokeneng = strtok(NULL, ";\n");
+        }
+    }
+    
+    if (!deleteVocaList(tobekknd)) {
+        return false;
+    }
+    
+    
+    free(engList);
+    return true;
+}
 

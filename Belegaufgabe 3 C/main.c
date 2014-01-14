@@ -82,41 +82,10 @@ int main(int argc, const char * argv[])
         perror(NULL); //I wonder if that ever happens
     free(filename);
     
-    if (!deleteVocaList(vdictionary)) {
-        fprintf(stderr, "Who cares, OS cleans up anyway, but TODO");
-    }
+    if (!emptyAndDeleteVocalist(vdictionary))
+        fprintf(stderr, "Deleting of Vocalist failed, but OS is cleaning anyway\n");
     
     
     
     return 0;
 }
-
-/* Old test cases
- vocalist *foo = newVocaList();
- insertVoca(foo, "House", "Haus");
- insertVoca(foo, "Cat", "Katze");
- insertVoca(foo, "X-Ray", "Röntgen");
- insertVoca(foo, "append", "hinzufügen");
- insertVoca(foo, "Fence", "Zaun");
- insertVoca(foo, "Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz", "Pneumonoultramicroscopicsilicovolcanoconiosis");
- 
- 
- printf("%s\n", getEnglish(foo, "Katze"));
- 
- char *barger = createSortedListGerman(foo);
- printf("%s",barger);
- free(barger);
- 
- deleteVoca(foo, "X-Ray", "Röntgen");
- 
- char *bareng = createSortedListEnglish(foo);
- printf("%s",bareng);
- free(bareng);
- 
- deleteVoca(foo, "House", getGerman(foo, "House"));
- deleteVoca(foo, "Cat", getGerman(foo, "Cat"));
- deleteVoca(foo, "append", getGerman(foo, "append"));
- deleteVoca(foo, "Fence", getGerman(foo, "Fence"));
- deleteVoca(foo, "Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz", getGerman(foo, "Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz"));
- 
- deleteVocaList(foo);*/
