@@ -16,6 +16,7 @@
 #include <errno.h>
 #include "ui.h"
 #include "vocalist.h"
+#include "persist_vocalist.h"
 
 
 int main(int argc, const char * argv[])
@@ -76,8 +77,22 @@ int main(int argc, const char * argv[])
     }
 
     vocalist *vdictionary = newVocaList();
+    if (!readDictFromFile(fdictionary, vdictionary)) {
+        fprintf(stderr, "Cant parse file\n");
+        return EXIT_FAILURE;
+    }
+    
+    
+    //Main UI Loop
     UILoop(vdictionary);
     
+    //Saveing
+    if (!saveDictToFile(fdictionary, vdictionary)) {
+        fprintf(stderr, "Cant save file\n");
+        return EXIT_FAILURE;
+    }
+    
+    //Cleanup
     if (!fclose(fdictionary))
         perror(NULL); //I wonder if that ever happens
     free(filename);
