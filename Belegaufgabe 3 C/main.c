@@ -31,7 +31,7 @@ int main(int argc, const char * argv[])
         switch (option) {
             case 'h':
                 printf("%s [-h] [filename]\n \n ", argv[0]);
-                printf("If filename is not given, it will use %s.dic",argv[0]);
+                printf("If filename is not given, it will use %s.dic\n",argv[0]);
                 return EXIT_SUCCESS;
                 break;
             default:
