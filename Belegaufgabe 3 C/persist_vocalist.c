@@ -18,7 +18,11 @@ _Bool readDictFromFile(FILE *filetodict,vocalist *dictToBeExtended)
 {
     char buff[bufflen];
     while (fgets(buff, bufflen, filetodict) != NULL ) {
-        if (!insertVoca(dictToBeExtended, strtok(buff, ";\n"), strtok(NULL, ";\n"))) {
+        char *eng = strtok(buff, ";\n"); char *ger = strtok(NULL, ";\n");
+        if (eng == NULL || ger == NULL) {
+            break;
+        }
+        if (!insertVoca(dictToBeExtended, eng, ger)) {
             return false;
         }
     }
