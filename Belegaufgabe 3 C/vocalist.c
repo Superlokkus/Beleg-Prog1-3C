@@ -236,7 +236,10 @@ _Bool emptyAndDeleteVocalist(vocalist *tobekknd)
         if (i%2 == 0) {
             tokenger = strtok(NULL, ";\n");
             if (!deleteVoca(tobekknd, tokeneng, tokenger))
+            {
+                free(engList);
                 return false;
+            }
         }
         else {
             tokeneng = strtok(NULL, ";\n");
@@ -244,6 +247,7 @@ _Bool emptyAndDeleteVocalist(vocalist *tobekknd)
     }
     
     if (!deleteVocaList(tobekknd)) {
+        free(engList);
         return false;
     }
     
