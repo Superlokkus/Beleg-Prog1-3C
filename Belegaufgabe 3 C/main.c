@@ -93,7 +93,7 @@ int main(int argc, const char * argv[])
     }
     
     //Cleanup
-    if (!fclose(fdictionary))
+    if (fclose(fdictionary) == EOF)
         perror(NULL); //I wonder if that ever happens
     free(filename);
     

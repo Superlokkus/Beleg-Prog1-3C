@@ -217,7 +217,8 @@ char* createSortedListEnglish(const vocalist *tobelisted, char delimiter[], char
 _Bool deleteVoca(vocalist *list,const char *english, const char *german)
 {
     if (getGerman(list, english) != NULL && getEnglish(list, german) != NULL) { //Both tList current now on item to delete
-        removeItem(list->engList); free(getSelected(list->gerList)); removeItem(list->gerList);
+        wordpair *tobedeleted = (wordpair *) getSelected(list->gerList);
+        removeItem(list->engList); free(tobedeleted->english); free(tobedeleted->german); free(getSelected(list->gerList)); removeItem(list->gerList);
         return true;
     }
     return false;
