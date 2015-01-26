@@ -106,6 +106,7 @@ int insertHead (tList* pList, void *pItemIns)
             return FAIL;
         }
         newCnct->item = pItemIns;
+        newCnct->next=NULL; newCnct->prev=NULL;
         pList->head = newCnct; pList->tail = newCnct; pList->current = newCnct;
         return OK;
     }
@@ -130,6 +131,7 @@ int insertTail (tList* pList, void *pItemIns)
             return FAIL;
         }
         newCnct->item = pItemIns;
+        newCnct->next=NULL; newCnct->prev=NULL;
         pList->head = newCnct; pList->tail = newCnct; pList->current = newCnct;
         return OK;
     }
